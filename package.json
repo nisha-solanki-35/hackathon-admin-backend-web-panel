@@ -1,8 +1,8 @@
 {
-  "name": "@minimal/material-kit-react",
-  "author": "minimals.cc",
+  "name": "Admin Backend Web Panel",
+  "author": "Nisha Solanki",
   "licence": "MIT",
-  "version": "1.5.0",
+  "version": "0.0.0",
   "private": false,
   "scripts": {
     "start": "react-scripts start",
