@@ -1,17 +1,18 @@
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 // form
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form'
 // @mui
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material'
 
 // ----------------------------------------------------------------------
 
 RHFCheckbox.propTypes = {
-  name: PropTypes.string.isRequired,
-};
+  name: PropTypes.string.isRequired
+}
 
-export function RHFCheckbox({ name, ...other }) {
-  const { control } = useFormContext();
+export function RHFCheckbox ({ name, ...other }) {
+  const { control } = useFormContext()
 
   return (
     <FormControlLabel
@@ -24,18 +25,18 @@ export function RHFCheckbox({ name, ...other }) {
       }
       {...other}
     />
-  );
+  )
 }
 
 // ----------------------------------------------------------------------
 
 RHFMultiCheckbox.propTypes = {
   name: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-};
+  options: PropTypes.array.isRequired
+}
 
-export function RHFMultiCheckbox({ name, options, ...other }) {
-  const { control } = useFormContext();
+export function RHFMultiCheckbox ({ name, options, ...other }) {
+  const { control } = useFormContext()
 
   return (
     <Controller
@@ -43,7 +44,7 @@ export function RHFMultiCheckbox({ name, options, ...other }) {
       control={control}
       render={({ field }) => {
         const onSelected = (option) =>
-          field.value.includes(option) ? field.value.filter((value) => value !== option) : [...field.value, option];
+          field.value.includes(option) ? field.value.filter((value) => value !== option) : [...field.value, option]
 
         return (
           <FormGroup>
@@ -61,8 +62,8 @@ export function RHFMultiCheckbox({ name, options, ...other }) {
               />
             ))}
           </FormGroup>
-        );
+        )
       }}
     />
-  );
+  )
 }

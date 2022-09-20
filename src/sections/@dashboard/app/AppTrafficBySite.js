@@ -1,18 +1,19 @@
+import React from 'react'
 // @mui
-import PropTypes from 'prop-types';
-import { Box, Card, Paper, Typography, CardHeader, CardContent } from '@mui/material';
+import PropTypes from 'prop-types'
+import { Box, Card, Paper, Typography, CardHeader, CardContent } from '@mui/material'
 // utils
-import { fShortenNumber } from '../../../utils/formatNumber';
+import { fShortenNumber } from '../../../utils/formatNumber'
 
 // ----------------------------------------------------------------------
 
 AppTrafficBySite.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
-  list: PropTypes.array.isRequired,
-};
+  list: PropTypes.array.isRequired
+}
 
-export default function AppTrafficBySite({ title, subheader, list, ...other }) {
+export default function AppTrafficBySite ({ title, subheader, list, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -22,7 +23,7 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
           sx={{
             display: 'grid',
             gap: 2,
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: 'repeat(2, 1fr)'
           }}
         >
           {list.map((site) => (
@@ -39,5 +40,5 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
         </Box>
       </CardContent>
     </Card>
-  );
+  )
 }

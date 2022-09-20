@@ -1,11 +1,12 @@
+import React from 'react'
 // @mui
-import PropTypes from 'prop-types';
-import { alpha, styled } from '@mui/material/styles';
-import { Card, Typography } from '@mui/material';
+import PropTypes from 'prop-types'
+import { alpha, styled } from '@mui/material/styles'
+import { Card, Typography } from '@mui/material'
 // utils
-import { fShortenNumber } from '../../../utils/formatNumber';
+import { fShortenNumber } from '../../../utils/formatNumber'
 // components
-import Iconify from '../../../components/Iconify';
+import Iconify from '../../../components/Iconify'
 
 // ----------------------------------------------------------------------
 
@@ -17,8 +18,8 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
   width: theme.spacing(8),
   height: theme.spacing(8),
   justifyContent: 'center',
-  marginBottom: theme.spacing(3),
-}));
+  marginBottom: theme.spacing(3)
+}))
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +28,10 @@ AppWidgetSummary.propTypes = {
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
-  sx: PropTypes.object,
-};
+  sx: PropTypes.object
+}
 
-export default function AppWidgetSummary({ title, total, icon, color = 'primary', sx, ...other }) {
+export default function AppWidgetSummary ({ title, total, icon, color = 'primary', sx, ...other }) {
   return (
     <Card
       sx={{
@@ -39,7 +40,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         textAlign: 'center',
         color: (theme) => theme.palette[color].darker,
         bgcolor: (theme) => theme.palette[color].lighter,
-        ...sx,
+        ...sx
       }}
       {...other}
     >
@@ -50,7 +51,7 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
             `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
               theme.palette[color].dark,
               0.24
-            )} 100%)`,
+            )} 100%)`
         }}
       >
         <Iconify icon={icon} width={24} height={24} />
@@ -62,5 +63,5 @@ export default function AppWidgetSummary({ title, total, icon, color = 'primary'
         {title}
       </Typography>
     </Card>
-  );
+  )
 }

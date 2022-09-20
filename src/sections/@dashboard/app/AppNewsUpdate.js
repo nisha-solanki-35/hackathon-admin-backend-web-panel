@@ -1,21 +1,22 @@
+import React from 'react'
 // @mui
-import PropTypes from 'prop-types';
-import { Box, Stack, Link, Card, Button, Divider, Typography, CardHeader } from '@mui/material';
+import PropTypes from 'prop-types'
+import { Box, Stack, Link, Card, Button, Divider, Typography, CardHeader } from '@mui/material'
 // utils
-import { fToNow } from '../../../utils/formatTime';
+import { fToNow } from '../../../utils/formatTime'
 // components
-import Iconify from '../../../components/Iconify';
-import Scrollbar from '../../../components/Scrollbar';
+import Iconify from '../../../components/Iconify'
+import Scrollbar from '../../../components/Scrollbar'
 
 // ----------------------------------------------------------------------
 
 AppNewsUpdate.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
-  list: PropTypes.array.isRequired,
-};
+  list: PropTypes.array.isRequired
+}
 
-export default function AppNewsUpdate({ title, subheader, list, ...other }) {
+export default function AppNewsUpdate ({ title, subheader, list, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -36,7 +37,7 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
         </Button>
       </Box>
     </Card>
-  );
+  )
 }
 
 // ----------------------------------------------------------------------
@@ -46,12 +47,12 @@ NewsItem.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
     postedAt: PropTypes.instanceOf(Date),
-    title: PropTypes.string,
-  }),
-};
+    title: PropTypes.string
+  })
+}
 
-function NewsItem({ news }) {
-  const { image, title, description, postedAt } = news;
+function NewsItem ({ news }) {
+  const { image, title, description, postedAt } = news
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
@@ -71,5 +72,5 @@ function NewsItem({ news }) {
         {fToNow(postedAt)}
       </Typography>
     </Stack>
-  );
+  )
 }

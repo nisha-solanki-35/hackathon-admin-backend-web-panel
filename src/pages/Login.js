@@ -1,23 +1,24 @@
-import { Link as RouterLink } from 'react-router-dom';
+import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 // @mui
-import { styled } from '@mui/material/styles';
-import { Card, Link, Container, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles'
+import { Card, Link, Container, Typography } from '@mui/material'
 // hooks
-import useResponsive from '../hooks/useResponsive';
+import useResponsive from '../hooks/useResponsive'
 // components
-import Page from '../components/Page';
-import Logo from '../components/Logo';
+import Page from '../components/Page'
+import Logo from '../components/Logo'
 // sections
-import { LoginForm } from '../sections/auth/login';
-import AuthSocial from '../sections/auth/AuthSocial';
+import { LoginForm } from '../sections/auth/login'
+import AuthSocial from '../sections/auth/AuthSocial'
 
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
-    display: 'flex',
-  },
-}));
+    display: 'flex'
+  }
+}))
 
 const HeaderStyle = styled('header')(({ theme }) => ({
   top: 0,
@@ -31,9 +32,9 @@ const HeaderStyle = styled('header')(({ theme }) => ({
   justifyContent: 'space-between',
   [theme.breakpoints.up('md')]: {
     alignItems: 'flex-start',
-    padding: theme.spacing(7, 5, 0, 7),
-  },
-}));
+    padding: theme.spacing(7, 5, 0, 7)
+  }
+}))
 
 const SectionStyle = styled(Card)(({ theme }) => ({
   width: '100%',
@@ -41,8 +42,8 @@ const SectionStyle = styled(Card)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  margin: theme.spacing(2, 0, 2, 2),
-}));
+  margin: theme.spacing(2, 0, 2, 2)
+}))
 
 const ContentStyle = styled('div')(({ theme }) => ({
   maxWidth: 480,
@@ -51,15 +52,15 @@ const ContentStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  padding: theme.spacing(12, 0),
-}));
+  padding: theme.spacing(12, 0)
+}))
 
 // ----------------------------------------------------------------------
 
-export default function Login() {
-  const smUp = useResponsive('up', 'sm');
+export default function Login () {
+  const smUp = useResponsive('up', 'sm')
 
-  const mdUp = useResponsive('up', 'md');
+  const mdUp = useResponsive('up', 'md')
 
   return (
     <Page title="Login">
@@ -110,5 +111,5 @@ export default function Login() {
         </Container>
       </RootStyle>
     </Page>
-  );
+  )
 }

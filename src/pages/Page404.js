@@ -1,9 +1,10 @@
-import { Link as RouterLink } from 'react-router-dom';
+import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 // @mui
-import { styled } from '@mui/material/styles';
-import { Button, Typography, Container, Box } from '@mui/material';
+import { styled } from '@mui/material/styles'
+import { Button, Typography, Container, Box } from '@mui/material'
 // components
-import Page from '../components/Page';
+import Page from '../components/Page'
 
 // ----------------------------------------------------------------------
 
@@ -15,11 +16,11 @@ const ContentStyle = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   flexDirection: 'column',
   padding: theme.spacing(12, 0)
-}));
+}))
 
 // ----------------------------------------------------------------------
 
-export default function Page404() {
+export default function Page404 () {
   return (
     <Page title="404 Page Not Found">
       <Container>
@@ -45,5 +46,5 @@ export default function Page404() {
         </ContentStyle>
       </Container>
     </Page>
-  );
+  )
 }

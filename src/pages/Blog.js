@@ -1,24 +1,25 @@
-import { Link as RouterLink } from 'react-router-dom';
+import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 // material
-import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { Grid, Button, Container, Stack, Typography } from '@mui/material'
 // components
-import Page from '../components/Page';
-import Iconify from '../components/Iconify';
-import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog';
+import Page from '../components/Page'
+import Iconify from '../components/Iconify'
+import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../sections/@dashboard/blog'
 // mock
-import POSTS from '../_mock/blog';
+import POSTS from '../_mock/blog'
 
 // ----------------------------------------------------------------------
 
 const SORT_OPTIONS = [
   { value: 'latest', label: 'Latest' },
   { value: 'popular', label: 'Popular' },
-  { value: 'oldest', label: 'Oldest' },
-];
+  { value: 'oldest', label: 'Oldest' }
+]
 
 // ----------------------------------------------------------------------
 
-export default function Blog() {
+export default function Blog () {
   return (
     <Page title="Dashboard: Blog">
       <Container>
@@ -43,5 +44,5 @@ export default function Blog() {
         </Grid>
       </Container>
     </Page>
-  );
+  )
 }

@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import React, { useState } from 'react'
 // material
-import { Container, Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material'
 // components
-import Page from '../components/Page';
-import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
+import Page from '../components/Page'
+import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products'
 // mock
-import PRODUCTS from '../_mock/products';
+import PRODUCTS from '../_mock/products'
 
 // ----------------------------------------------------------------------
 
-export default function EcommerceShop() {
-  const [openFilter, setOpenFilter] = useState(false);
+export default function EcommerceShop () {
+  const [openFilter, setOpenFilter] = useState(false)
 
   const handleOpenFilter = () => {
-    setOpenFilter(true);
-  };
+    setOpenFilter(true)
+  }
 
   const handleCloseFilter = () => {
-    setOpenFilter(false);
-  };
+    setOpenFilter(false)
+  }
 
   return (
     <Page title="Dashboard: Products">
@@ -42,5 +42,5 @@ export default function EcommerceShop() {
         <ProductCartWidget />
       </Container>
     </Page>
-  );
+  )
 }

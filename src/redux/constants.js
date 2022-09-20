@@ -1,0 +1,5 @@
+export const LOGIN = 'LOGIN'
+export const TOKEN_LOGIN = 'TOKEN_LOGIN'
+export const ERROR_MSG = 'ERROR_MSG'
+export const CLEAR_AUTH_RESPONSE = 'CLEAR_AUTH_RESPONSE'
+export const CLEAR_ERROR_MSG = 'CLEAR_ERROR_MSG'
