@@ -6,7 +6,10 @@ import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material'
 // components
 import Iconify from '../../components/Iconify'
 //
+import Searchbar from './Searchbar'
 import AccountPopover from './AccountPopover'
+import LanguagePopover from './LanguagePopover'
+import NotificationsPopover from './NotificationsPopover'
 
 // ----------------------------------------------------------------------
 
@@ -35,13 +38,10 @@ const ToolbarStyle = styled(Toolbar)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 DashboardNavbar.propTypes = {
-  onOpenSidebar: PropTypes.func,
-  handleOnLogout: PropTypes.func,
-  open: PropTypes.bool,
-  setOpen: PropTypes.func
+  onOpenSidebar: PropTypes.func
 }
 
-export default function DashboardNavbar ({ onOpenSidebar, handleOnLogout, open, setOpen }) {
+export default function DashboardNavbar ({ onOpenSidebar }) {
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -49,10 +49,13 @@ export default function DashboardNavbar ({ onOpenSidebar, handleOnLogout, open, 
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
 
+        <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          <AccountPopover handleOnLogout={handleOnLogout} open={open} setOpen={setOpen} />
+          <LanguagePopover />
+          <NotificationsPopover />
+          <AccountPopover />
         </Stack>
       </ToolbarStyle>
     </RootStyle>

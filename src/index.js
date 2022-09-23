@@ -4,26 +4,26 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
-import { Provider } from 'react-redux'
-import { store } from './redux/Store'
 
 //
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import reportWebVitals from './reportWebVitals'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 // ----------------------------------------------------------------------
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+const queryClient = new QueryClient()
 
 root.render(
-  <Provider store={store} >
+  <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </HelmetProvider>
-  </Provider>
+  </QueryClientProvider>
 )
 
 // If you want to enable client cache, register instead.

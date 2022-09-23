@@ -1,13 +1,13 @@
 import React from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
-// layouts
+import DashboardIndex from 'src/views/Dashboard'
+import VendorDetailsIndex from 'src/views/VendorManagement/VendorDetails'
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout'
 import NotFound from '../pages/Page404'
 import AdvertisementIndex from '../views/AdvertisementManagement'
 import ForgotPasswordIndex from '../views/Auth/ForgotPassword'
 import LoginIndex from '../views/Auth/Login'
 import ResetPasswordIndex from '../views/Auth/ResetPassword'
-import DashboardApp from '../views/Dashboard/Dashboard'
 import ProfileIndex from '../views/MyProfile'
 import ScreenIndex from '../views/ScreenManagement'
 import SubadminIndex from '../views/SubadminManagement'
@@ -32,9 +32,17 @@ export default function Router () {
         { path: 'change-password', element: <PrivateRoute element={<ResetPasswordIndex />} /> }
       ]
     },
-    { path: 'dashboard', element: <PrivateRoute element={<DashboardApp/>} /> },
+    { path: 'dashboard', element: <PrivateRoute element={<DashboardIndex/>} /> },
     { path: 'subadmin-management', element: <PrivateRoute element={<SubadminIndex />} /> },
-    { path: 'vendor-management', element: <PrivateRoute element={<VendorIndex />} /> },
+    {
+      path: '/vendor-management',
+      children: [
+        { path: '', element: <PrivateRoute element={<VendorIndex />} /> },
+        { path: 'create-vendor', element: <PrivateRoute element={<VendorDetailsIndex />} /> },
+        { path: 'update-vendor/:vendorId', element: <PrivateRoute element={<VendorDetailsIndex />} /> }
+      ]
+    },
+
     { path: 'advertisement-management', element: <PrivateRoute element={<AdvertisementIndex />} /> },
     { path: 'screen-management', element: <PrivateRoute element={<ScreenIndex />} /> },
     {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 // @mui
 import { alpha } from '@mui/material/styles'
@@ -7,6 +7,7 @@ import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@
 import MenuPopover from '../../components/MenuPopover'
 // mocks_
 import account from '../../_mock/account'
+import PropTypes from 'prop-types'
 
 // ----------------------------------------------------------------------
 
@@ -19,21 +20,22 @@ const MENU_OPTIONS = [
   {
     label: 'Profile',
     icon: 'eva:person-fill',
-    linkTo: '#'
+    linkTo: '/my-profile'
   },
   {
-    label: 'Settings',
+    label: 'Change Password',
     icon: 'eva:settings-2-fill',
-    linkTo: '#'
+    linkTo: '/my-profile/change-password'
   }
 ]
 
 // ----------------------------------------------------------------------
 
-export default function AccountPopover () {
+export default function AccountPopover ({ handleOnLogout, open, setOpen }) {
   const anchorRef = useRef(null)
+  // const navigate = useNavigate()
 
-  const [open, setOpen] = useState(null)
+  const adminData = JSON.parse(localStorage.getItem('adminData'))
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget)
@@ -82,10 +84,10 @@ export default function AccountPopover () {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {adminData.sName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {adminData.sEmail}
           </Typography>
         </Box>
 
@@ -101,10 +103,16 @@ export default function AccountPopover () {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleOnLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>
     </>
   )
+}
+
+AccountPopover.propTypes = {
+  handleOnLogout: PropTypes.func,
+  open: PropTypes.bool,
+  setOpen: PropTypes.func
 }

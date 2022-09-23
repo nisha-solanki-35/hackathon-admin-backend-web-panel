@@ -1,12 +1,26 @@
-import React from 'react'
-// import PropTypes from 'prop-types'
+import React, { Fragment, useState } from 'react'
+import Header from 'src/components/Header'
+import VendorManagement from './VendorManagement'
 
-function VendorIndex (props) {
+function VendorIndex () {
+  const [search, setSearch] = useState('')
+
+  const handleOnChange = (event) => {
+    setSearch(event.target.value)
+  }
+
   return (
-    <div>VendorIndex</div>
+    <Fragment>
+      <Header
+        title='Vendor Management'
+        addLink='/vendor-management/create-vendor'
+        handleOnChange={handleOnChange}
+      />
+      <VendorManagement
+        search={search}
+      />
+    </Fragment>
   )
 }
-
-VendorIndex.propTypes = {}
 
 export default VendorIndex

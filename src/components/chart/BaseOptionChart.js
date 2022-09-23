@@ -1,17 +1,18 @@
+import React from 'react'
 // material
-import { alpha, useTheme } from '@mui/material/styles';
-import { GlobalStyles } from '@mui/material';
+import { alpha, useTheme } from '@mui/material/styles'
+import { GlobalStyles } from '@mui/material'
 
 // ----------------------------------------------------------------------
 
-export function BaseOptionChartStyle() {
-  const theme = useTheme();
+export function BaseOptionChartStyle () {
+  const theme = useTheme()
 
   const background = {
     backdropFilter: 'blur(6px)',
     WebkitBackdropFilter: 'blur(6px)', // Fix on Mobile
     backgroundColor: alpha(theme.palette.background.default, 0.72)
-  };
+  }
 
   return (
     <GlobalStyles
@@ -58,24 +59,24 @@ export function BaseOptionChartStyle() {
         }
       }}
     />
-  );
+  )
 }
 
-export default function BaseOptionChart() {
-  const theme = useTheme();
+export default function BaseOptionChart () {
+  const theme = useTheme()
 
   const LABEL_TOTAL = {
     show: true,
     label: 'Total',
     color: theme.palette.text.secondary,
     ...theme.typography.subtitle2
-  };
+  }
 
   const LABEL_VALUE = {
     offsetY: 8,
     color: theme.palette.text.primary,
     ...theme.typography.h3
-  };
+  }
 
   return {
     // Colors
@@ -240,5 +241,5 @@ export default function BaseOptionChart() {
         }
       }
     ]
-  };
+  }
 }

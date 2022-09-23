@@ -11,21 +11,18 @@ import { LoadingButton } from '@mui/lab'
 // components
 import Iconify from '../../../components/Iconify'
 import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from 'src/redux/actions/auth'
+import { useMutation } from 'react-query'
+import Loader from 'src/components/Loader'
+import { login } from 'src/API/auth'
+import MessagePopup from 'src/components/MessagePopup'
 
 // ----------------------------------------------------------------------
 
 export default function Login () {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const [showPassword, setShowPassword] = useState(false)
-
-  const resStatus = useSelector(state => state.auth.resStatus)
-  const resMessage = useSelector(state => state.auth.resMessage)
-
-  console.log('resMessage, resStatus', resMessage, resStatus)
+  const [isOpen, setIsOpen] = useState(false)
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -49,19 +46,49 @@ export default function Login () {
     formState: { isSubmitting }
   } = methods
 
+  const { mutate, isSuccess, isError, error, isLoading, data, status } = useMutation('login', login, {
+    onSuccess: (data) => {
+      console.log(data)
+    }
+  })
+
+  console.log('data', data)
+  console.log('isSuccess, isError, error, isLoading', isSuccess, isError, error, isLoading, status)
+
   const onSubmit = (loginCreds) => {
-    // dispatch(login(loginCreds))
-    navigate('/dashboard', { replace: true })
+    mutate(loginCreds)
   }
 
   useEffect(() => {
-    if (resMessage && resStatus) {
-      // navigate('/dashboard', { replace: true })
+    if (isError) {
+      setIsOpen(true)
     }
-  }, [resMessage])
+  }, [isError])
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  useEffect(() => {
+    if (status === 'success' && data) {
+      const userData = data && data?.data?.data
+      const obj = {}
+      localStorage.setItem('token', data?.data?.Authorization)
+      localStorage.setItem('adminData', JSON.stringify(data?.data?.data))
+      userData && userData.iRoleId && userData.iRoleId.aPermissions && userData.iRoleId.aPermissions.map(permission => {
+        obj[permission.sKey] = permission.eType
+        return obj
+      })
+      localStorage.setItem('adminPermission', JSON.stringify(obj))
+      navigate('/dashboard')
+    }
+  }, [status])
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+      <Loader isOpen={status === 'loading'} />
+      <MessagePopup isOpen={isOpen} handleClose={handleClose} error={error} />
+
       <Stack spacing={3}>
         <RHFTextField name="email" label="Email address" handleChange={ { ...register('email') }} />
 
