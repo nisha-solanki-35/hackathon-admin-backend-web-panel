@@ -13,11 +13,6 @@ import PropTypes from 'prop-types'
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
-    icon: 'eva:home-fill',
-    linkTo: '/'
-  },
-  {
     label: 'Profile',
     icon: 'eva:person-fill',
     linkTo: '/my-profile'

@@ -10,13 +10,13 @@ function VendorManagement (props) {
   const { search: searchProp } = props
   const [isOpen, setIsOpen] = useState(false)
   const [start, setStart] = useState(0)
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(10)
   const [rows, setRows] = useState([])
   const [search, setSearch] = useState('')
   const token = localStorage.getItem('token')
 
-  const { mutate: deleteV, isError: isErrorDelete, error: deleteError, isLoading: deleteLoading, data: deletedData, status: deletionStatus } = useMutation('DeleteVendor', deleteVendor)
+  const { mutate: deleteV, error: deleteError, isLoading: deleteLoading, data: deletedData, status: deletionStatus } = useMutation('DeleteVendor', deleteVendor)
   const { data: vendorList, status } = useQuery(
     ['GetVendorList', page, rowsPerPage, search, deletedData?.data?.status === 200],
     () => getVendorList({ start, limit: rowsPerPage, search, token }),
@@ -67,17 +67,18 @@ function VendorManagement (props) {
   }, [deletionStatus])
 
   const onDelete = (vendorId) => {
-    deleteV({ vendorId })
+    deleteV({ vendorId, token })
   }
 
   const handleClose = () => {
     setIsOpen(false)
   }
 
+  console.log('deleteError?.response', deleteError?.response)
   return (rows
     ? <>
       <Loader isOpen={deleteLoading}/>
-      <MessagePopup isOpen={isOpen} error={isErrorDelete} successMsg={deletedData} handleClose={handleClose} />
+      <MessagePopup isOpen={isOpen} error={deleteError} successMsg={deletedData} handleClose={handleClose} />
       <ListTable
         onDelete={onDelete}
         viewLink={'/vendor-management/update-vendor/'}
@@ -133,7 +134,7 @@ function VendorManagement (props) {
 }
 
 VendorManagement.propTypes = {
-  search: PropTypes.search
+  search: PropTypes.string
 }
 
 export default VendorManagement

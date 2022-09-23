@@ -5,6 +5,7 @@ import { Alert, Snackbar } from '@mui/material'
 function MessagePopup (props) {
   const { isOpen, handleClose, error, successMsg } = props
 
+  console.log('error?.data', error?.data)
   return (
     <Snackbar
       open={isOpen}

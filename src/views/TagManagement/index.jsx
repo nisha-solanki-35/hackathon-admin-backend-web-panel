@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react'
 import Header from 'src/components/Header'
-import ScreenManagement from './ScreenManagement'
+import TagManagement from './TagManagement'
 
-function ScreenIndex () {
+function TagIndex () {
   const [search, setSearch] = useState('')
 
   const handleOnChange = (event) => {
@@ -12,15 +12,15 @@ function ScreenIndex () {
   return (
     <Fragment>
       <Header
-        title='Screen Management'
-        addLink='/screen-management/create-screen'
+        title='Tag Management'
+        addLink='/tag-management/create-tag'
         handleOnChange={handleOnChange}
       />
-      <ScreenManagement
+      <TagManagement
         search={search}
       />
     </Fragment>
   )
 }
 
-export default ScreenIndex
+export default TagIndex

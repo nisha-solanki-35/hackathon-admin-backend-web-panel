@@ -28,8 +28,8 @@ const navConfig = [
     icon: getIcon('el:screen')
   },
   {
-    title: 'Label',
-    path: '/label-management',
+    title: 'Tag',
+    path: '/tag-management',
     icon: getIcon('emojione-monotone:label')
   }
 ]

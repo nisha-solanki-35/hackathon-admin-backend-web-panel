@@ -4,9 +4,9 @@ import Loader from 'src/components/Loader'
 import { useMutation, useQuery } from 'react-query'
 import ListTable from 'src/components/ListTable'
 import MessagePopup from 'src/components/MessagePopup'
-import { deleteAdvertisement, getAdvertisementList } from 'src/API/advertisement'
+import { deleteTag, getTagList } from 'src/API/tag'
 
-function AdvertiseManagement (props) {
+function TagManagement (props) {
   const { search: searchProp } = props
   const [isOpen, setIsOpen] = useState(false)
   const [start, setStart] = useState(0)
@@ -16,26 +16,26 @@ function AdvertiseManagement (props) {
   const [search, setSearch] = useState('')
   const token = localStorage.getItem('token')
 
-  const { mutate: deleteV, isError: isErrorDelete, error: deleteError, isLoading: deleteLoading, data: deletedData, status: deletionStatus } = useMutation('DeleteAdvertisment', deleteAdvertisement)
-  const { data: advertisementList, status } = useQuery(
-    ['GetAdvertismentList', page, rowsPerPage, search, deletedData?.data?.status === 200],
-    () => getAdvertisementList({ start, limit: rowsPerPage, search, token }),
+  const { mutate: deleteV, isError: isErrorDelete, error: deleteError, isLoading: deleteLoading, data: deletedData, status: deletionStatus } = useMutation('TagAdvertisment', deleteTag)
+  const { data: TagList, status } = useQuery(
+    ['GetTagList', page, rowsPerPage, search, deletedData?.data?.status === 200],
+    () => getTagList({ start, limit: rowsPerPage, search, token }),
     { retry: false }
   )
 
-  const previousProps = useRef({ advertisementList, searchProp }).current
+  const previousProps = useRef({ TagList, searchProp }).current
 
   useEffect(() => {
-    if (previousProps.advertisementList !== advertisementList) {
-      if (advertisementList?.results) {
-        const list = advertisementList?.results?.map(data => createData(data.sName || '--', data.sEmail || '--', data.sMobileNo || '--', data.eStatus ? 'Yes' : 'No', data._id))
+    if (previousProps.TagList !== TagList) {
+      if (TagList?.length !== 0) {
+        const list = TagList?.map(data => createData(data.sName || '--', data.eStatus ? 'Yes' : 'No', data._id))
         setRows(list)
       }
     }
     return () => {
-      previousProps.advertisementList = advertisementList
+      previousProps.TagList = TagList
     }
-  }, [advertisementList])
+  }, [TagList])
 
   useEffect(() => {
     const callSearchService = () => {
@@ -56,8 +56,8 @@ function AdvertiseManagement (props) {
     }
   }, [searchProp])
 
-  function createData (sName, sEmail, sMobileNo, eStatus, _id) {
-    return { sName, sEmail, sMobileNo, eStatus, _id }
+  function createData (sName, eStatus, _id) {
+    return { sName, eStatus, _id }
   }
 
   useEffect(() => {
@@ -66,8 +66,8 @@ function AdvertiseManagement (props) {
     }
   }, [deletionStatus])
 
-  const onDelete = (advertisementId) => {
-    deleteV({ advertisementId, token })
+  const onDelete = (tagId) => {
+    deleteV({ tagId, token })
   }
 
   const handleClose = () => {
@@ -80,11 +80,11 @@ function AdvertiseManagement (props) {
       <MessagePopup isOpen={isOpen} error={isErrorDelete} successMsg={deletedData} handleClose={handleClose} />
       <ListTable
         onDelete={onDelete}
-        viewLink={'/vendor-management/update-vendor/'}
+        viewLink={'/tag-management/update-tag/'}
         rows={rows}
-        heading={['Name', 'Email', 'Mobile', 'Status', 'Actions']}
+        heading={['Name', 'Status', 'Actions']}
         cell={rows?.length !== 0 && Object.keys(rows[0])}
-        length={advertisementList?.nTotal}
+        length={TagList?.nTotal}
         page={page}
         start={start}
         setStart={setStart}
@@ -96,8 +96,8 @@ function AdvertiseManagement (props) {
     : <Loader isOpen={status === 'loading'} />)
 }
 
-AdvertiseManagement.propTypes = {
+TagManagement.propTypes = {
   search: PropTypes.search
 }
 
-export default AdvertiseManagement
+export default TagManagement

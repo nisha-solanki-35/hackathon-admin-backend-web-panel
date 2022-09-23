@@ -93,7 +93,7 @@ function ListTable (props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table aria-label="custom pagination table">
         <TableHead>
           <TableRow>
             {heading?.map((headingData, index) => <TableCell>{headingData}</TableCell>)}
@@ -120,7 +120,7 @@ function ListTable (props) {
             </TableRow>
           )} */}
         </TableBody>
-          : <p style={{ textAlign: 'center', fontSize: '20px', fontWeight: 'bolder', padding: '70px 0' }}>Data not available</p>}
+          : <p style={{ textAlign: 'right', fontSize: '20px', fontWeight: 'bolder', padding: '70px 0' }}>Data not available</p>}
         <TableFooter>
           <TableRow>
             <TablePagination

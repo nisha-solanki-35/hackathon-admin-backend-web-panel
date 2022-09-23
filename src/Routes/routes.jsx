@@ -1,6 +1,11 @@
 import React from 'react'
-import { Navigate, useRoutes } from 'react-router-dom'
+import { Navigate, useNavigate, useRoutes } from 'react-router-dom'
+import instance from 'src/API/baseURL'
+import AdvertisementDetailsIndex from 'src/views/AdvertisementManagement/AdvertisementDetails'
 import DashboardIndex from 'src/views/Dashboard'
+import ScreenDetailsIndex from 'src/views/ScreenManagement/ScreenDetails'
+import TagIndex from 'src/views/TagManagement'
+import TagDetailsIndex from 'src/views/TagManagement/TagDetails'
 import VendorDetailsIndex from 'src/views/VendorManagement/VendorDetails'
 import LogoOnlyLayout from '../layouts/LogoOnlyLayout'
 import NotFound from '../pages/Page404'
@@ -18,6 +23,15 @@ import PublicRoute from './PublicRoute'
 // ----------------------------------------------------------------------
 
 export default function Router () {
+  const navigate = useNavigate()
+  instance.interceptors.response.use(response => response, (error) => {
+    if ((error.response && error.response.status === 401) && (error?.response?.data?.message === 'Authentication failed. Please login again!')) {
+      localStorage.removeItem('token')
+      navigate('/login')
+    }
+    return Promise.reject(error)
+  })
+
   return useRoutes([
     { path: '/', element: <PublicRoute element={<LoginIndex />} /> },
     { path: 'login', element: <PublicRoute element={<LoginIndex />} /> },
@@ -27,8 +41,8 @@ export default function Router () {
 
     {
       path: '/my-profile',
-      element: <PrivateRoute element={<ProfileIndex />} />,
       children: [
+        { path: '', element: <PrivateRoute element={<ProfileIndex />} /> },
         { path: 'change-password', element: <PrivateRoute element={<ResetPasswordIndex />} /> }
       ]
     },
@@ -42,9 +56,30 @@ export default function Router () {
         { path: 'update-vendor/:vendorId', element: <PrivateRoute element={<VendorDetailsIndex />} /> }
       ]
     },
-
-    { path: 'advertisement-management', element: <PrivateRoute element={<AdvertisementIndex />} /> },
-    { path: 'screen-management', element: <PrivateRoute element={<ScreenIndex />} /> },
+    {
+      path: '/advertisement-management',
+      children: [
+        { path: '', element: <PrivateRoute element={<AdvertisementIndex />} /> },
+        { path: 'create-advertisement', element: <PrivateRoute element={<AdvertisementDetailsIndex />} /> },
+        { path: 'update-advertisement/:advertisementId', element: <PrivateRoute element={<AdvertisementDetailsIndex />} /> }
+      ]
+    },
+    {
+      path: '/screen-management',
+      children: [
+        { path: '', element: <PrivateRoute element={<ScreenIndex />} /> },
+        { path: 'create-screen', element: <PrivateRoute element={<ScreenDetailsIndex />} /> },
+        { path: 'update-screen/:screenId', element: <PrivateRoute element={<ScreenDetailsIndex />} /> }
+      ]
+    },
+    {
+      path: '/tag-management',
+      children: [
+        { path: '', element: <PrivateRoute element={<TagIndex />} /> },
+        { path: 'create-tag', element: <PrivateRoute element={<TagDetailsIndex />} /> },
+        { path: 'update-tag/:tagId', element: <PrivateRoute element={<TagDetailsIndex />} /> }
+      ]
+    },
     {
       path: '/',
       element: <LogoOnlyLayout />,

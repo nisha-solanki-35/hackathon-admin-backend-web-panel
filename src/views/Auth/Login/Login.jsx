@@ -46,11 +46,7 @@ export default function Login () {
     formState: { isSubmitting }
   } = methods
 
-  const { mutate, isSuccess, isError, error, isLoading, data, status } = useMutation('login', login, {
-    onSuccess: (data) => {
-      console.log(data)
-    }
-  })
+  const { mutate, isSuccess, isError, error, isLoading, data, status } = useMutation('Login', login)
 
   console.log('data', data)
   console.log('isSuccess, isError, error, isLoading', isSuccess, isError, error, isLoading, status)

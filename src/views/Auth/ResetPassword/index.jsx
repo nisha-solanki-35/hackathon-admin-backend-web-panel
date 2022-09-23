@@ -4,7 +4,6 @@ import ResetPassword from './ResetPassword'
 function ResetPasswordIndex () {
   return (
       <>
-        jdiojdiojiojio
         <ResetPassword />
       </>
   )

@@ -1,5 +1,5 @@
 import { Crypt } from 'hybrid-crypto-js'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const publicKey = `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDUH3YJ9lSOPsof/8qyHKPG1kuA
@@ -9,9 +9,8 @@ SJi4Dm1LbgpnL6FLgwIDAQAB
 -----END PUBLIC KEY-----`
 
 export function unAuthorized () {
-  const navigate = useNavigate()
   localStorage.removeItem('token')
-  navigate('/login', { replace: true })
+  // navigate('/login', { replace: true })
 }
 
 export function encryption (sPassword) {

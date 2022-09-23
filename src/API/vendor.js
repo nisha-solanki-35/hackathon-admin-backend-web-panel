@@ -5,7 +5,6 @@ export const getVendorList = async (listData) => {
 }
 
 export const getVendorDetails = async (vendorId, token) => {
-  console.log('vendorId, token', vendorId, token)
   return await axios.get(`/vendor-profile/${vendorId}/v1`, { headers: { Authorization: token } })
 }
 
@@ -19,6 +18,7 @@ export const updateVendor = async (updateVendorDetails) => {
   return await axios.put(`/vendor-profile/${vendorId}/v1`, { sEmail: vendorData.sEmail, sMobileNo: vendorData.sMobileNo, eStatus: vendorData.eStatus, sName: vendorData.sName }, { headers: { Authorization: token } })
 }
 
-export const deleteVendor = async ({ vendorId, token }) => {
+export const deleteVendor = async (data) => {
+  const { vendorId, token } = data
   return await axios.delete(`/vendor-profile/${vendorId}/v1`, { headers: { Authorization: token } })
 }

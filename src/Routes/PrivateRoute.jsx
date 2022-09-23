@@ -38,10 +38,7 @@ function PrivateRoute ({ element: Component }) {
   const [isOpen, setIsOpen] = useState(false)
   const token = localStorage.getItem('token')
 
-  const { mutate: accountLogout, isSuccess: isLoggedOut, isError: isLogoutError, error: logoutError, isLoading: isLogoutLoading, data: loggedOutData, status: logoutStatus } = useMutation('Logout', logout)
-
-  console.log('token', token)
-  console.log('isLoggedOut, isLogoutError, logoutError, isLogoutLoading, loggedOutData, logoutStatus', isLoggedOut, isLogoutError, logoutError, isLogoutLoading, loggedOutData, logoutStatus)
+  const { mutate: accountLogout, error: logoutError, isLoading: isLogoutLoading, status: logoutStatus } = useMutation('Logout', logout)
 
   useEffect(() => {
     if (logoutStatus === 'success') {
@@ -64,11 +61,12 @@ function PrivateRoute ({ element: Component }) {
   const handleClose = () => {
     setIsOpen(null)
   }
+  console.log('token', token)
 
-  return (
-    token
-      ? <RootStyle>
-        <Loader isOpen={logoutStatus === 'loading'} />
+  if (token) {
+    return (
+    <RootStyle>
+        <Loader isOpen={isLogoutLoading} />
         <MessagePopup isOpen={isOpen} handleClose={handleClose} error={logoutError} />
         <DashboardNavbar onOpenSidebar={() => setOpen(true)} handleOnLogout={handleOnLogout} open={open} setOpen={setOpen} />
         <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
@@ -76,9 +74,10 @@ function PrivateRoute ({ element: Component }) {
           {Component}
           <Outlet />
         </MainStyle>
-      </RootStyle>
-      : <Navigate to='/login' replace/>
-  )
+      </RootStyle>)
+  } else {
+    return <Navigate to='/login' replace/>
+  }
 }
 
 PrivateRoute.propTypes = {
